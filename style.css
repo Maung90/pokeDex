@@ -6,6 +6,10 @@
 	padding: 0;
 	font-family: 'Victor Mono', monospace;
 }
+body{
+
+	background-color: whitesmoke;
+}
 h1{
 	display: flex;
 	align-items: center;
@@ -40,27 +44,49 @@ h1{
 	padding: 10px;
 	font-size: 18px;
 }
-ol{
-	width: 80%; 
-	margin: 20px auto;
-	display: flex;
-	flex-wrap:  wrap;
-	list-style: none;
+.box-2{ 
+	margin: auto;
+	margin-top: 20px;
+	width: 90%;
+	display: flex; 
+	flex-wrap: wrap; 
 }
-ol li { 
-	width: 250px;
+.box-2 .card-custom{
+	display: flex;
+	flex-wrap: wrap;
+	margin: 15px;
+	padding: 20px;
+	width: 14rem;
+	height: 15rem; 
+	background-color: white;
+	border-radius: 10px ;
+	box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
+}
+.box-2 .card-custom img{
+	margin: 15px 25%;
+	width: 100px;
+	height: 100px;
+}
+.box-2 .card-custom h4{
+	width: 140px;
+}
+.box-2 .card-custom h5{
+	color: grey;
+}
+.box-2 .card-custom .btn-detail{
 	display: flex;
 	justify-content: center;
-}
-ol li ul li{
-	list-style: none;
+	align-items: center;
+	background-color: royalblue;
+	color: #FFFF0B;
+	padding: 5px; 
+	width: 100%;
+	cursor: pointer;
 }
 
-ol li ul li img {
-	height: 150px;
-}
-ol li ul li img:hover{
-	cursor: pointer;
-	transition: 1s;
-	transform: scale(2.3); 
+@media (max-width: 576px){
+
+	.box-2{ 
+		justify-content: center;
+	}
 }
