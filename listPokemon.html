@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PokemonDex - MyPokemon</title>
+	<link rel="shortcut icon" href="https://w7.pngwing.com/pngs/173/464/png-transparent-pokemon-ball-pokeball-area-wiki-technology-thumbnail.png">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="style2.css">
+</head>
+<body>
+	<nav>
+		<h1>
+			Cari Pokemon
+		</h1>	
+		<div class="link">
+			<a href="index.html">
+				Home
+			</a>
+			<a class="active" href="#">
+				My Pokemon
+			</a>
+		</div>
+	</nav>
+	
+	<div class="container">
+		<h1>
+			My Pokemon
+		</h1>
+		<div class="box-2" id="box-2">  
+		</div>
+		<div class="modal-box" id="modal-box" style="transform: scale(0);">
+			<div class="modal-dialog" id="modal-dialog">
+				<div class="modal-header">
+					<h3 >
+						Detail
+					</h3>
+					<p class="btn-close" id="btn-close">
+						<i class="fa fa-window-close" aria-hidden="true"></i>
+					</p>
+				</div>
+				<div class="modal-body" id="modal-body">
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		// https://pokeapi.co/api/v2/pokemon-species/4/
+		// console.log(sessionStorage.getItem('namaPokemon'));
+		var box = document.getElementById('box-2'); 
+		if (JSON.parse(sessionStorage.getItem('namaPokemon') == null ) ){
+			box.innerHTML = `
+			<h1 align='center' style='color:red'>
+			Belum ada Pokemon yang di tangkap!
+			</h1>	
+			`;
+		}
+		else{
+			var data = JSON.parse(sessionStorage.getItem('namaPokemon'));
+			for (var i = data.length - 1; i >= 0; i--) {
+				fetchPokemon(data[i]);
+			}
+		}
+
+
+		function fetchPokemon(pokemon) {
+
+			
+			// box.innerHTML = '';	
+			fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
+			.then(response=>{
+				return response.json(); 
+			})
+			.then(pokemonData =>{   
+
+
+				var	pokemonImage = pokemonData['sprites']['versions']['generation-vi']['omegaruby-alphasapphire'].front_shiny;
+				if (pokemonImage == null) {
+					pokemonImage =  pokemonData['sprites']['versions']['generation-v']['black-white'].front_default; 
+				}
+				let card = document.createElement("div");
+				card.setAttribute('class','card-custom'); 
+
+				let img = document.createElement('img');
+				img.setAttribute('id','img');
+
+				let name = document.createElement("h4");
+				name.setAttribute('id','name');
+
+				let width = document.createElement("p"); 
+
+				let height = document.createElement("p"); 
+
+				let h5 = document.createElement('h5');   
+
+				let btn = document.createElement("div");
+				btn.setAttribute('class','btn-detail'); 
+				btn.setAttribute('id','btn-detail'); 
+
+				img.src = pokemonImage;
+
+				name.innerHTML = pokemonData.name;
+				height.innerHTML = pokemonData.height + " cm" ;
+				width.innerHTML = pokemonData.weight + " g" ; 
+				btn.innerHTML = "See Detail";
+
+				h5.appendChild(width);
+				h5.appendChild(height);
+
+				card.appendChild(img);
+				card.appendChild(name);
+				card.appendChild(h5);
+				card.appendChild(btn);
+
+				btn.addEventListener('click',function(){
+					showModal(pokemonData);
+				});
+
+				box.appendChild(card); 
+			}).catch(error =>{
+				console.log('Error : ',error.message);
+			}) 
+		}
+
+		function showModal(pokemonData) {
+
+			let color;
+			fetch(pokemonData['species'].url)
+			.then(response=>{
+				return response.json();
+			}).then(pokemonData2=>{
+
+				color = pokemonData2['color'].name;
+
+
+				let modalBox = document.getElementById('modal-box');  
+				let modalClose = document.getElementById('btn-close');
+				let modalBody = document.getElementById('modal-body');
+				let modalDialog = document.getElementById("modal-dialog");
+				modalBox.style.transform = "scale(1)";
+
+
+				modalDialog.style.background = `linear-gradient(${color},#F9F9F9,#F3F2F2,#F9F9F9)`;
+				let img2 = document.createElement("img");
+
+				img2.src = pokemonData['sprites']['versions']['generation-v']['black-white']['animated'].front_shiny;
+
+
+				modalBody.innerHTML = ""; 
+				modalBody.appendChild(img2);
+
+
+				let boxDetail = document.createElement("div");
+				boxDetail.setAttribute('class','box-detail');
+
+				let name = document.createElement("h5");
+				name.innerHTML = pokemonData['name'];
+
+
+				let abilities = document.createElement("p");
+				abilities.setAttribute('align','center');
+				abilities.innerHTML = 'Abilities';
+
+				let boxAbility = document.createElement("div");
+				boxAbility.setAttribute('class','boxAbility');
+
+				let element = document.createElement("p");
+				element.setAttribute('align','center');
+				element.innerHTML = "Stats";
+
+
+				let cover = document.createElement("div");
+				cover.setAttribute('class','cover');
+				for (var i in pokemonData['stats']) {			
+
+					let bar = document.createElement("div");
+					bar.setAttribute('class','bar');
+
+					if (color == 'white' ) {
+						color = '#B504FF';
+					}else if(color == 'yellow'){
+						bar.style.color	= '#FE3312';
+					}
+
+					let coverBar = document.createElement("div");
+					coverBar.setAttribute('class','cover-bar');
+
+					let statsName = document.createElement("p"); 
+					statsName.setAttribute('align','right');
+					statsName.style.width = '110px';
+					statsName.innerHTML =pokemonData['stats'][i]['stat']['name'];
+
+
+					bar.innerHTML = pokemonData['stats'][i]['base_stat'];
+					bar.style.background = color;
+					bar.style.width = `${pokemonData['stats'][i]['base_stat']}px`;
+
+					coverBar.appendChild(statsName); 
+					coverBar.appendChild(bar);
+					cover.appendChild(coverBar);
+				}
+
+
+
+				boxDetail.appendChild(name);
+				boxDetail.appendChild(abilities);
+
+				for (var i in pokemonData['abilities']) {
+					let abilitiesObject = document.createElement("p");
+					abilitiesObject.setAttribute('align','center');
+					abilitiesObject.setAttribute('class','abilitiesObject');
+
+					abilitiesObject.innerHTML = pokemonData['abilities'][i]['ability'].name;
+					if (color == 'white' ) {
+						color = '#B504FF';
+					}else if(color == 'yellow'){
+						abilitiesObject.style.color	= '#FE3312';
+					}
+					abilitiesObject.style.background = color;
+					boxAbility.appendChild(abilitiesObject);
+				}
+				boxDetail.appendChild(boxAbility); 
+				boxDetail.appendChild(element);
+				boxDetail.appendChild(cover);
+
+				modalBody.appendChild(boxDetail);
+
+
+				modalClose.addEventListener("click", function () {
+					modalBox.style.transition = "0.3s";
+					modalBox.style.transform = "scale(0)";
+				});
+
+
+
+
+			}).catch(error=>{
+				console.log("Error"+error.message);
+			});
+		}
+	</script>
+</body>
+</html>

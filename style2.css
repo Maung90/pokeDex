@@ -8,7 +8,7 @@
 }
 body{
 	overflow-x: hidden; 
-	background-color: whitesmoke;
+	background-color: white;
 }
 nav{
 	display: flex;
@@ -35,28 +35,18 @@ nav a:hover,.active{
 
 }
 .container{
-	height: 90vh; 
+	width: 100vw;
 }
-.box{ 
-	margin-top: 25px;
+.container h1{
 	display: flex;
-	justify-content: center; 
-}
-.box input{
-	border: none; 
-	border: 1px solid royalblue; 
-	width: 20%;
-	height: 25px;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	color: darkgrey;
+	border-bottom: 3px solid whitesmoke;
+	height: 10vh;
 	padding: 10px;
-}
-
-.box button{ 
-	cursor: pointer;
-	border: none; 
-	background-color: royalblue;
-	color: yellow;
-	padding: 10px;
-	font-size: 18px;
+	margin: 0 auto;
 }
 .box-2{ 
 	margin: auto;
@@ -69,6 +59,7 @@ nav a:hover,.active{
 	display: flex;
 	flex-wrap: wrap;
 	margin: 15px;
+	margin-top: 30px;
 	padding: 20px;
 	width: 14rem;
 	height: 15rem; 
@@ -160,30 +151,21 @@ border-radius: 4px;
 font-size: 11px;
 color: white;
 text-align: center;
-} 
-.modal-footer { 
-	padding: 10px;
-	background-color: royalblue;
-	color: white;
-	text-align: center; 
-	cursor: pointer;
 }
 .boxAbility {
 	display: flex;
 	flex-wrap: nowrap;
 }
 .abilitiesObject{
+	padding: 5px;
 	margin:5px 5px;
 	height: 20px; 
-	padding: 5px;
 	border-radius: 5px;
 	color: white;
 	font-size: 10px;
+	display: flex;
+	align-items: center;
 }
-
-
-
-
 
 @media (max-width: 576px){
 
@@ -209,7 +191,7 @@ text-align: center;
 	.modal-box .modal-dialog{
 		padding: 10px 10px 30px 10px;
 		width:100%; 
-		height: auto;
+		height: 55vh;
 		border-radius: 5px;
 		padding-bottom: none;
 	}
