@@ -67,7 +67,8 @@ function showModal(pokemonData) {
 		modalDialog.style.background = `linear-gradient(${color},#F9F9F9,#F3F2F2,#F9F9F9)`;
 		let img2 = document.createElement("img");
 
-		img2.src = pokemonData['sprites']['versions']['generation-v']['black-white']['animated'].front_shiny;
+		// img2.src = pokemonData['sprites']['versions']['generation-v']['black-white']['animated'].front_shiny;
+		img2.src = pokemonData['sprites']['other']['official-artwork'].front_shiny;
 
 
 		modalBody.innerHTML = ""; 
