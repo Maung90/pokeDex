@@ -10,18 +10,43 @@ function getRndInteger(min, max) {
 }
 
 var data = JSON.parse(sessionStorage.getItem('namaPokemon')) || [];
-function catchPokemon(pokemon){
+function catchPokemon(pokemon, nilai){
 	if (!data.includes(pokemon)) {
-		data.push(pokemon);
-		sessionStorage.setItem('namaPokemon',JSON.stringify(data));
-		console.log(sessionStorage.getItem('namaPokemon'));
-		console.log(data);
+		if (nilai != 5) {
+			var a = showAlert('Click Again! Jangan Menyerah','#FE1212');
+			clearInterval(a);
+		}else{
+			data.push(pokemon);
+			sessionStorage.setItem('namaPokemon',JSON.stringify(data));
+			clearInterval(a);
+			a = showAlert('<i class="fa fa-circle-check"></i>&nbsp; Pokemon Has Been Catch!','#04B10C');
+		}
+	}else{
+		a = showAlert('Pokemon Telah Tertangkap','#363639');
+		clearInterval(a);
 	}
+}
+
+function showAlert(kalimat,color){
+	var alert = document.getElementById('alert'); 
+	alert.style.transition = '1s';
+	alert.style.transform = 'translateX(0%)';
+	alert.style.display = 'flex';
+	alert.innerHTML = kalimat;
+	alert.style.backgroundColor = color;
+	setInterval(hideAlert,3000);
+}
+function hideAlert(){
+	var alert = document.getElementById('alert'); 
+	alert.style.transition = '2s';
+	alert.style.transform = 'translateX(100%)';
+	alert.style.display = 'none';
 }
 
 function showModal(pokemonData) {
 
 	let color;
+	// console.log(pokemonData);
 	fetch(pokemonData['species'].url)
 	.then(response=>{
 		return response.json();
@@ -131,7 +156,8 @@ function showModal(pokemonData) {
 		});
 
 		btnCatch.addEventListener("click",function(){
-			catchPokemon(pokemonData['name']);
+			let nilai = getRndInteger(0,5);
+			catchPokemon(pokemonData['name'],nilai);
 		});
 
 
@@ -160,7 +186,7 @@ function fetchPokemon2() {
 			}).then(pokemonData2 => {
 
 
-				var	pokemonImage = pokemonData2['sprites']['versions']['generation-vi']['omegaruby-alphasapphire'].front_shiny;
+				var	pokemonImage = pokemonData2['sprites']['other']['official-artwork'].front_default;
 
 				let card = document.createElement("div");
 				card.setAttribute('class','card-custom'); 
@@ -234,7 +260,7 @@ function fetchPokemon(pokemon) {
 					return response.json();
 				}).then(pokemonData2 => {
 
-					var	pokemonImage = pokemonData2['sprites']['versions']['generation-vi']['omegaruby-alphasapphire'].front_shiny;
+					var	pokemonImage = pokemonData2['sprites']['other']['official-artwork'].front_default;
 					if (pokemonImage == null) {
 						pokemonImage =  pokemonData2['sprites']['versions']['generation-v']['black-white'].front_default; 
 					}

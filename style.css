@@ -44,7 +44,7 @@ nav a:hover,.active{
 }
 .box input{
 	border: none; 
-	border: 1px solid royalblue; 
+/*	border: 1px solid royalblue; */
 	width: 20%;
 	height: 25px;
 	padding: 10px;
@@ -97,16 +97,16 @@ nav a:hover,.active{
 	width: 100%;
 	cursor: pointer;
 }
-
 .modal-box{
 	position: fixed;
 	min-width: 100vw;
 	min-height: 100vh ;
 	top: 0;
-	background-color: rgba(0, 0, 0, 0.1);
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	background-color: rgba(0, 0, 0, 0.4);
+	backdrop-filter: blur(5px);
 }
 .modal-box .modal-dialog{
 	padding: 10px 10px 30px 10px;
@@ -181,10 +181,24 @@ text-align: center;
 	font-size: 10px;
 }
 
+.alert {
+	display: flex;
+	color: ghostwhite;
+	align-items: center;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+/*	background-color: #04B10C;*/
+	padding: 15px;
+	transform: translateX(100%);
+/*	justify-content: space-between;*/
+}
 
 
 
 
+
+/* HandPhone  */
 @media (max-width: 576px){
 
 	.box input{
@@ -197,19 +211,21 @@ text-align: center;
 
 	}
 	nav {
-		font-size: 14px;
+		font-size: 13px;
+		height: 7vh;
 	}
 	.box-2{ 
 		justify-content: center;
 	}
 	.modal-box{
-		align-items: unset;
+		align-items: center;
 	}
 
 	.modal-box .modal-dialog{
+/*		margin-top: 10%;*/
 		padding: 10px 10px 30px 10px;
-		width:100%; 
-		height: auto;
+		width:80%; 
+		height: 60%;
 		border-radius: 5px;
 		padding-bottom: none;
 	}
@@ -222,3 +238,7 @@ text-align: center;
 		height:100px;
 	}
 }
+
+
+/*https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png
+https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/1.gif*/
