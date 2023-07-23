@@ -1,7 +1,7 @@
 var search = document.getElementById('search'); 
 var btn = document.getElementById('btn');
 var box = document.getElementById('box-2'); 
-console.log(sessionStorage.clear());
+//console.log(sessionStorage.clear());
 // console.log(sessionStorage.getItem('namaPokemon'));
 
 
