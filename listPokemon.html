@@ -50,9 +50,12 @@
 		var box = document.getElementById('box-2'); 
 		if (JSON.parse(sessionStorage.getItem('namaPokemon') == null ) ){
 			box.innerHTML = `
-			<h1 align='center' style='color:red'>
-			Belum ada Pokemon yang di tangkap!
-			</h1>	
+			<div style="display:flex; justify-content:center; align-items: center; width:100vw; flex-wrap:wrap">
+				<img src="https://img.pokemondb.net/artwork/avif/pikachu.avif" width="250px" alt="Gambar - Pokemon" height="300px" style='opacity:0.7'>
+				<h2 align='center' style='color:darkgrey'>
+				Belum ada Pokemon yang di tangkap!
+				</h2>
+			</div>	
 			`;
 		}
 		else{
@@ -74,10 +77,10 @@
 			.then(pokemonData =>{   
 
 
-				var	pokemonImage = pokemonData2['sprites']['other']['official-artwork'].front_default;
-				if (pokemonImage == null) {
-					pokemonImage =  pokemonData['sprites']['versions']['generation-v']['black-white'].front_default; 
-				}
+				var	pokemonImage = pokemonData['sprites']['other']['official-artwork'].front_default;
+				// if (pokemonImage == null) {
+				// 	pokemonImage =  pokemonData['sprites']['versions']['generation-v']['black-white'].front_default; 
+				// }
 				let card = document.createElement("div");
 				card.setAttribute('class','card-custom'); 
 
@@ -144,8 +147,7 @@
 				let img2 = document.createElement("img");
 
 				//img2.src = pokemonData['sprites']['versions']['generation-v']['black-white']['animated'].front_shiny;
-				img2.src = pokemonData['sprites']['other']['official-artwork'].front_shiny;
-
+				img2.src = pokemonData['sprites']['other']['official-artwork'].front_default;
 
 				modalBody.innerHTML = ""; 
 				modalBody.appendChild(img2);

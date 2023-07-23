@@ -1,7 +1,7 @@
 var search = document.getElementById('search'); 
 var btn = document.getElementById('btn');
 var box = document.getElementById('box-2'); 
-// console.log(sessionStorage.clear());
+console.log(sessionStorage.clear());
 // console.log(sessionStorage.getItem('namaPokemon'));
 
 
@@ -68,7 +68,7 @@ function showModal(pokemonData) {
 		let img2 = document.createElement("img");
 
 		// img2.src = pokemonData['sprites']['versions']['generation-v']['black-white']['animated'].front_shiny;
-		img2.src = pokemonData['sprites']['other']['official-artwork'].front_shiny;
+		img2.src = pokemonData['sprites']['other']['official-artwork'].front_default;
 
 
 		modalBody.innerHTML = ""; 
